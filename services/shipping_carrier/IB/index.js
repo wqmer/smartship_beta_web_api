@@ -77,7 +77,7 @@ class InternationalBridge {
     this.asset = asset;
   }
 
-  listernWebHook = function (request_body, type = "refund") {
+  listernWebHook(request_body, type = "refund") {
     var v = new Validator();
     let responseFormat = {};
 
@@ -110,7 +110,7 @@ class InternationalBridge {
 
     // var Validator = require("jsonschema").Validator;
     // var v = new Validator();
-  };
+  }
 
   // void = () => {
 
