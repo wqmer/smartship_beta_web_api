@@ -77,7 +77,7 @@ class InternationalBridge {
     this.asset = asset;
   }
 
-  listernWebHook = (request_body, type = "refund") => {
+  listernWebHook = function (request_body, type = "refund") {
     var v = new Validator();
     let responseFormat = {};
 
