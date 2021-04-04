@@ -8,29 +8,37 @@ const beautifyUnique = require("mongoose-beautiful-unique-validation");
 const { Schema } = mongoose;
 
 var SchemaTypes = mongoose.Schema.Types;
-var order = new mongoose.Schema(
+
+//current use for IB refund/adjustment.
+var record = new mongoose.Schema(
   {
-    order_id: {
+    request_id: {
       type: String,
-      unique: "order_id must be unique !",
     },
 
-    type: { type: String, default: "Domestic_ship" },
-    status: { type: String, default: "draft" },
+    tracking_number: { type: String },
 
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
+    type: { type: String },
 
-    created_at: {
+    comment: { type: String },
+
+    amount: { type: Number },
+
+    amount_due: { type: Number },
+
+    inform_at: {
       type: String,
       default: () => moment().format("YYYY-MM-DD HH:mm"),
     },
+
+    label_create_at: {
+      type: String,
+    },
   },
+
   { versionKey: false }
 );
-order.plugin(mongoosePaginate);
+record.plugin(mongoosePaginate);
 // order.plugin(AutoIncrement, {
 //     inc_field: 'order_counter',
 //     start_seq: '00001',
@@ -38,5 +46,5 @@ order.plugin(mongoosePaginate);
 // });
 // order.plugin(beautifyUnique);
 // order.plugin(aggregatePaginate);
-order.index({ "$**": "text" });
-module.exports = mongoose.model("Order", order);
+record.index({ "$**": "text" });
+module.exports = mongoose.model("Record", record);

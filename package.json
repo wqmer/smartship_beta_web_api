@@ -28,6 +28,7 @@
     "image-convert": "^0.1.33",
     "jest": "^22.1.4",
     "jimp": "^0.16.1",
+    "jsonschema": "^1.4.0",
     "lodash": "^4.17.15",
     "migrate-mongoose": "^3.2.2",
     "moment": "^2.23.0",
