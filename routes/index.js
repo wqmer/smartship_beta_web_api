@@ -22,9 +22,13 @@ const {
 
 //Here set your router
 
-router.get("/welcome", (req, res) => {
-  responseClient(res, 200, 0, "Welcome to smartship beta api server. Server is  running well")
-});
+// router.get("/", (req, res) => {
+//   responseClient(res, 200, 0, " Server is running well");
+// });
+
+// router.get("/welcome", (req, res) => {
+//   responseClient(res, 200, 0, "Welcome to smartship beta api server.");
+// });
 
 router.post("/refund", (req, res) => {
   console.log(req.body); // Call your action on the request here
