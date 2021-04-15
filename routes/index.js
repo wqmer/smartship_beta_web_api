@@ -32,6 +32,7 @@ router.post("/refund", (req, res) => {
     let {
       request_id,
       tracking_number,
+      refund_type,
       type,
       comment,
       amount,
@@ -39,15 +40,7 @@ router.post("/refund", (req, res) => {
       label_create_at,
     } = result;
 
-    let record = new Record({
-      request_id,
-      tracking_number,
-      type,
-      comment,
-      amount,
-      amount_due,
-      label_create_at,
-    });
+    let record = new Record({ ...result });
 
     console.log(record);
 

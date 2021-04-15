@@ -43,6 +43,9 @@ const refundSchema = {
     refund: {
       type: "object",
       properties: {
+        type: {
+          type: "string",
+        },
         usps: {
           type: "object",
           properties: {
@@ -53,7 +56,7 @@ const refundSchema = {
           required: ["tracking_number", "comment", "amount"],
         },
       },
-      required: ["usps"],
+      required: ["type", "usps"],
     },
     mailpiece: {
       type: "object",
@@ -81,11 +84,13 @@ class InternationalBridge {
     var v = new Validator();
     let responseFormat = {};
 
+    //todo ajdustment
     if (type == "adjustment") {
       responseFomat = {};
       return;
     }
 
+    //should validate the rquest_body Json
     let isValidate = v.validate(request_body, refundSchema);
 
     if (isValidate) {
@@ -94,6 +99,7 @@ class InternationalBridge {
         request_id: request_body.mailpiece.request_id,
         tracking_number: request_body.refund.usps.tracking_number,
         type: request_body.type,
+        refund_type: request_body.refund.type,
         comment: request_body.refund.usps.comment,
         amount: request_body.refund.usps.amount,
         label_create_at: request_body.mailpiece.postmark_date,

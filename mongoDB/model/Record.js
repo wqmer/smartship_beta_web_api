@@ -20,6 +20,8 @@ var record = new mongoose.Schema(
 
     type: { type: String },
 
+    refund_type: { type: String },
+
     comment: { type: String },
 
     amount: { type: Number },
