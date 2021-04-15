@@ -42,7 +42,7 @@ router.post("/refund", (req, res) => {
 
     let record = new Record({ ...result });
 
-    console.log(record);
+    // console.log(record);
 
     record
       .save()

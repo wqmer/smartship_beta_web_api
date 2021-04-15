@@ -104,7 +104,7 @@ class InternationalBridge {
         amount: request_body.refund.usps.amount,
         label_create_at: request_body.mailpiece.postmark_date,
       };
-      console.log(responseFormat);
+      // console.log(responseFormat);
     } else {
       responseFormat = {
         code: 1,
