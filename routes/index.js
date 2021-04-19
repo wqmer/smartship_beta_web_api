@@ -14,6 +14,7 @@ const rrad = require("rrad");
 const Fakerator = require("fakerator");
 const fakerator = Fakerator();
 const util = require("util");
+const controller  = require('../controller/index');
 
 const {
   mapRequestToModel,
@@ -64,5 +65,10 @@ router.post("/adjustment", (req, res) => {
   console.log(req.body); // Call your action on the request here
   res.status(200).end(); // Responding is important
 });
+
+router.post("/exportRefundAndAdjustment",controller.exportRecord)
+
+
+
 
 module.exports = router;
