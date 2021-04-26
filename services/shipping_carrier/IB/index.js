@@ -279,6 +279,7 @@ class InternationalBridge {
         url: this.apiEndPoint + url,
         auth: { ...this.account },
       });
+      console.log(this.responseMapToResult(response))
       return this.responseMapToResult(response);
     } catch (error) {
       // console.log(error);
