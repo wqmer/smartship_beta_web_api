@@ -120,11 +120,12 @@ const addressValidate = async (req, res) => {
     let city = result.data ? result.data.city : req.city;
     responseClient(res, result.status, result.code, result.message, {
       address_info: result.data ? result.data : {},
-      address_match: req.addressMatched &&  req.addressMatched.length >0
-        ? req.addressMatched.map((item) => {
-            return { ...item, city };
-          })
-        : [],
+      address_match:
+        req.addressMatched && req.addressMatched.length > 0
+          ? req.addressMatched.map((item) => {
+              return { ...item, city };
+            })
+          : [],
     });
   } catch (error) {
     console.log(error);
@@ -188,6 +189,8 @@ const getCity = async (req, res, next) => {
     };
     let ib = new Ib({ ...account }, IBProdEndpoint);
     let result = await ib.getCity({ zip5: req.body.postal_code });
+
+    console.log(result);
     if (!result.data || result.data.length == 0) {
       req.city = undefined;
     }
