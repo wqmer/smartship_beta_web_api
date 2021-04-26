@@ -19,7 +19,7 @@ var record = new mongoose.Schema(
     tracking_number: { type: String },
 
     type: { type: String },
-
+    
     refund_type: { type: String },
 
     comment: { type: String },
@@ -27,6 +27,13 @@ var record = new mongoose.Schema(
     amount: { type: Number },
 
     amount_due: { type: Number },
+
+    //for label order 
+    weight : {type : Number} ,
+
+    zone : {type : Number}, 
+
+    to_zipcode: { type : String} ,
 
     inform_at: {
       type: String,

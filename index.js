@@ -1,13 +1,19 @@
 const Express = require("express");
 // const config = '../../config/config'
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 const keys = require("./config/keys");
 const config = require("./config/dev");
 const Pusher = require("pusher");
+const Record = require("./mongoDB/model/Record");
+const Timer = require("./mongoDB/model/Timer");
+const schedule = require("node-schedule");
+const controller = require("./controller");
+const moment = require("moment");
+const mongoose = require("mongoose");
+const system = require("./services/system");
 
 var https = require("https");
 https.globalAgent.keepAlive = true;
@@ -22,7 +28,13 @@ mongoose.Promise = require("bluebird");
 //connect db
 mongoose.connect(
   config.mongoURI,
-  { useUnifiedTopology: true, useNewUrlParser: true, poolSize: 500 },
+  {
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    poolSize: 500,
+  },
   function (err) {
     if (err) {
       console.log(err, "Database disconnected");
@@ -81,12 +93,15 @@ app.use(
 );
 app.use("/beta", require("./routes"));
 app.use("/", (req, res) => {
-  res.status(200).json({ code: 0, message: "Welcome to smartship beta api server. Server is running well." });
+  res.status(200).json({
+    code: 0,
+    message: "Welcome to smartship beta api server. Server is running well.",
+  });
 });
 
 const PORT = process.env.PORT || 5050;
 
-const channel = "orders";
+// const channel = "orders";
 
 //pusher for option
 // const pusher = new Pusher({
@@ -98,10 +113,29 @@ const channel = "orders";
 // });
 
 //监听数据库变化
+
 db.once("open", () => {
-  app.listen(PORT, () => {
+  app.listen(PORT, async () => {
     console.log(`Listening on port`, PORT);
+    // system.IB_scan_save("01 1 * * * *");
+
+    // 每分钟的第30秒触发： '30 * * * * *'
+
+    // 每小时的1分30秒触发 ：'30 1 * * * *'
+
+    // 每天的凌晨1点1分30秒触发 ：'30 1 1 * * *'
+
+    // 每月的1日1点1分30秒触发 ：'30 1 1 1 * *'
+
+    // 2016年的1月1日1点1分30秒触发 ：'30 1 1 1 2016 *'
+
+    // 每周1的1点1分30秒触发 ：'30 1 1 * * 1'
+
+    // let result = await Record.deleteMany({ type: "label" });
+    // console.log(result)
+    // scan();
   });
+
   // pusher.trigger('testChannel', 'testEvent', { message: 'hello,world' });
   // const taskCollection = db.collection('orders');
   // const changeStream = taskCollection.watch([], { maxAwaitTimeMS: 1000 });

@@ -68,6 +68,12 @@ router.post("/adjustment", (req, res) => {
 
 router.post("/exportRefundAndAdjustment",controller.exportRecord)
 
+router.post("/addressValidate",controller.getCity, controller.getMatchedAddress , controller.addressValidate)
+
+// router.post("/getMatchedAddress",controller.getMatchedAddress)
+
+
+
 
 
 
