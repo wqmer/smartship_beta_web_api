@@ -24,6 +24,7 @@ const {
 
 const exportRecord = async (req, res) => {
   try {
+    console.log(req.body.query)
     let result = await Record.find(req.body.query, req.body.select);
     responseClient(res, 200, 0, "Query successfully", result);
   } catch (error) {
