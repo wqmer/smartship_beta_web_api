@@ -9,7 +9,6 @@ const config = require("./config/dev");
 const Pusher = require("pusher");
 const Record = require("./mongoDB/model/Record");
 const Timer = require("./mongoDB/model/Timer");
-const schedule = require("node-schedule");
 const controller = require("./controller");
 const moment = require("moment");
 const mongoose = require("mongoose");
