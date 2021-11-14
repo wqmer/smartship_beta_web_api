@@ -1,7 +1,7 @@
 const { MIME_TIFF } = require("jimp");
 const axios = require("axios");
 const moment = require("moment");
-var Validator = require("jsonschema").Validator;
+// var Validator = require("jsonschema").Validator;
 
 const DEFAULT_DATA_SCHEME = function (data) {
   return data;
@@ -155,43 +155,43 @@ class InternationalBridge {
     return result;
   }
 
-  listernWebHook(request_body, type = "refund") {
-    var v = new Validator();
-    let responseFormat = {};
+  // listernWebHook(request_body, type = "refund") {
+  //   var v = new Validator();
+  //   let responseFormat = {};
 
-    //todo ajdustment
-    if (type == "adjustment") {
-      responseFomat = {};
-      return;
-    }
+  //   //todo ajdustment
+  //   if (type == "adjustment") {
+  //     responseFomat = {};
+  //     return;
+  //   }
 
-    //should validate the rquest_body Json
-    let isValidate = v.validate(request_body, refundSchema);
+  //   //should validate the rquest_body Json
+  //   let isValidate = v.validate(request_body, refundSchema);
 
-    if (isValidate) {
-      responseFormat = {
-        code: 0,
-        request_id: request_body.mailpiece.request_id,
-        tracking_number: request_body.refund.usps.tracking_number,
-        type: request_body.type,
-        refund_type: request_body.refund.type,
-        comment: request_body.refund.usps.comment,
-        amount: request_body.refund.usps.amount,
-        label_create_at: request_body.mailpiece.postmark_date,
-      };
-      // console.log(responseFormat);
-    } else {
-      responseFormat = {
-        code: 1,
-        errorMessage: isValidate.errors.map((item) => item.stack),
-      };
-    }
+  //   if (isValidate) {
+  //     responseFormat = {
+  //       code: 0,
+  //       request_id: request_body.mailpiece.request_id,
+  //       tracking_number: request_body.refund.usps.tracking_number,
+  //       type: request_body.type,
+  //       refund_type: request_body.refund.type,
+  //       comment: request_body.refund.usps.comment,
+  //       amount: request_body.refund.usps.amount,
+  //       label_create_at: request_body.mailpiece.postmark_date,
+  //     };
+  //     // console.log(responseFormat);
+  //   } else {
+  //     responseFormat = {
+  //       code: 1,
+  //       errorMessage: isValidate.errors.map((item) => item.stack),
+  //     };
+  //   }
 
-    return responseFormat;
+  //   return responseFormat;
 
-    // var Validator = require("jsonschema").Validator;
-    // var v = new Validator();
-  }
+  //   // var Validator = require("jsonschema").Validator;
+  //   // var v = new Validator();
+  // }
 
   async index(params, url = "/labels") {
     try {
