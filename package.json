@@ -2,8 +2,7 @@
   "name": "api-server",
   "version": "1.0.0",
   "engines": {
-    "node": "8.11.1",
-    "npm": "5.6.0 "
+    "node": ">=10"
   },
   "scripts": {
     "start": "node index.js "
